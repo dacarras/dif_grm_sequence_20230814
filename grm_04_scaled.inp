@@ -1,0 +1,152 @@
+DATA:
+FILE = "elpi_2010_2012_anx.dat";
+ 
+VARIABLE:
+NAMES = p10 p33 p37 p43 p47 p50 p68 p73 p87 p90 p96 id_i time; 
+ MISSING=.;
+ 
+      
+USEVARIABLES =
+p10-p96
+time
+;
+
+CATEGORICAL = 
+p10-p96;
+
+CLASSES = c(2);
+
+KNOWNCLASS = c(time = 
+0     !wave 2010
+1     !wave 2012
+);
+
+IDVARIABLE = id_i;
+
+ANALYSIS:
+
+TYPE = MIXTURE;
+ESTIMATOR = MLR;
+ALGORITHM = INTEGRATION;
+
+
+MODEL:
+
+
+%OVERALL%
+eta by p10@1;
+eta by p33@1;
+eta by p37@1;
+eta by p43@1;
+eta by p47@1;
+eta by p50@1;
+eta by p68@1;
+eta by p73@1;
+eta by p87@1;
+eta by p90@1;
+eta by p96@1;
+
+%c#1%
+eta by p10@1;
+eta by p33@1;
+eta by p37@1;
+eta by p43@1;
+eta by p47@1;
+eta by p50@1;
+eta by p68@1;
+eta by p73@1;
+eta by p87@1;
+eta by p90@1;
+eta by p96@1;
+
+!specific delta
+[p10$1] (a10_1);
+[p33$1] (a33_1);
+[p37$1] (a37_1);
+[p47$1] (a47_1);
+[p50$1] (a50_1);
+[p73$1] (a73_1);
+[p87$1] (a87_1);
+[p96$1] (a96_1);
+[p10$2] (a10_2);
+[p33$2] (a33_2);
+[p37$2] (a37_2);
+[p47$2] (a47_2);
+[p50$2] (a50_2);
+[p73$2] (a73_2);
+[p87$2] (a87_2);
+[p96$2] (a96_2);
+
+!latent mean
+[eta@0];
+
+!variance;
+eta(psi);
+
+!common deltas
+[p43$1] (c43_1);
+[p43$2] (c43_2);
+[p68$1] (c68_1);
+[p68$2] (c68_2);
+[p90$1] (c90_1);
+[p90$2] (c90_2);
+
+%c#2%
+eta by p10@1;
+eta by p33@1;
+eta by p37@1;
+eta by p43@1;
+eta by p47@1;
+eta by p50@1;
+eta by p68@1;
+eta by p73@1;
+eta by p87@1;
+eta by p90@1;
+eta by p96@1;
+
+!specific delta
+[p10$1] (b10_1);
+[p33$1] (b33_1);
+[p37$1] (b37_1);
+[p47$1] (b47_1);
+[p50$1] (b50_1);
+[p73$1] (b73_1);
+[p87$1] (b87_1);
+[p96$1] (b96_1);
+[p10$2] (b10_2);
+[p33$2] (b33_2);
+[p37$2] (b37_2);
+[p47$2] (b47_2);
+[p50$2] (b50_2);
+[p73$2] (b73_2);
+[p87$2] (b87_2);
+[p96$2] (b96_2);
+
+
+!free latent mean
+[eta];
+
+!variance;
+eta(psi);
+
+!common deltas
+[p43$1] (c43_1);
+[p43$2] (c43_2);
+[p68$1] (c68_1);
+[p68$2] (c68_2);
+[p90$1] (c90_1);
+[p90$2] (c90_2);
+
+
+
+OUTPUT:
+
+CINTERVAL
+RESIDUAL
+;
+
+SAVEDATA:
+
+FILE = grm_04_scaled_eta.dat;  
+SAVE = FSCORES;
+

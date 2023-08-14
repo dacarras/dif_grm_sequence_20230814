@@ -1,0 +1,668 @@
+Mplus VERSION 8.10 (Mac)
+MUTHEN & MUTHEN
+08/14/2023   2:07 AM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE = "elpi_2010_2012_anx.dat";
+
+  VARIABLE:
+  NAMES = p10 p33 p37 p43 p47 p50 p68 p73 p87 p90 p96 id_i time;
+
+  MISSING=.;
+
+  USEVARIABLES =
+  p10-p96
+  time
+  ;
+
+  CATEGORICAL =
+  p10-p96;
+
+  IDVARIABLE = id_i;
+
+  ANALYSIS:
+  TYPE = GENERAL;
+  ESTIMATOR = MLR;
+
+  MODEL:
+  !measurement model
+  theta by p10@1;
+  theta by p33@1;
+  theta by p37@1;
+  theta by p43@1;
+  theta by p47@1;
+  theta by p50@1;
+  theta by p68@1;
+  theta by p73@1;
+  theta by p87@1;
+  theta by p90@1;
+  theta by p96@1;
+
+  !heterogenous gap
+  p10 on time (d10);
+  p33 on time (d33);
+  p37 on time (d37);
+  p43 on time (d43);
+  p47 on time (d47);
+  p50 on time (d50);
+  p68 on time (d68);
+  p73 on time (d73);
+  p87 on time (d87);
+  p90 on time (d90);
+  p96 on time (d96);
+
+  !latent mean centered
+  [theta@0];
+
+  !variance;
+  theta(psi);
+
+
+  OUTPUT:
+  CINTERVAL
+  RESIDUAL
+  ;
+
+  SAVEDATA:
+
+  FILE = grm_03_heterogenous_eta.dat;
+  SAVE = FSCORES;
+
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       14014
+
+Number of dependent variables                                   11
+Number of independent variables                                  1
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   P10         P33         P37         P43         P47         P50
+   P68         P73         P87         P90         P96
+
+Observed independent variables
+   TIME
+
+Continuous latent variables
+   THETA
+
+Variables with special functions
+
+  ID variable           ID_I
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            1
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  elpi_2010_2012_anx.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of y missing data patterns           0
+     Number of u missing data patterns           1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    P10
+      Category 1    0.270         3786.000
+      Category 2    0.313         4392.000
+      Category 3    0.416         5836.000
+    P33
+      Category 1    0.502         7039.000
+      Category 2    0.245         3435.000
+      Category 3    0.253         3540.000
+    P37
+      Category 1    0.484         6782.000
+      Category 2    0.234         3279.000
+      Category 3    0.282         3953.000
+    P43
+      Category 1    0.852        11938.000
+      Category 2    0.117         1642.000
+      Category 3    0.031          434.000
+    P47
+      Category 1    0.574         8040.000
+      Category 2    0.259         3633.000
+      Category 3    0.167         2341.000
+    P50
+      Category 1    0.784        10992.000
+      Category 2    0.135         1887.000
+      Category 3    0.081         1135.000
+    P68
+      Category 1    0.469         6573.000
+      Category 2    0.345         4841.000
+      Category 3    0.186         2600.000
+    P73
+      Category 1    0.656         9190.000
+      Category 2    0.265         3707.000
+      Category 3    0.080         1117.000
+    P87
+      Category 1    0.673         9434.000
+      Category 2    0.244         3421.000
+      Category 3    0.083         1159.000
+    P90
+      Category 1    0.928        13006.000
+      Category 2    0.063          889.000
+      Category 3    0.008          119.000
+    P96
+      Category 1    0.285         3988.000
+      Category 2    0.291         4079.000
+      Category 3    0.424         5947.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     TIME                  0.500       0.000       0.000   50.00%       0.000      0.000      0.500
+           14014.000       0.250      -2.000       1.000   50.00%       1.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       34
+
+Loglikelihood
+
+          H0 Value                     -122962.959
+          H0 Scaling Correction Factor      1.0014
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  245993.919
+          Bayesian (BIC)                246250.544
+          Sample-Size Adjusted BIC      246142.495
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ THETA    BY
+    P10                1.000      0.000    999.000    999.000
+    P33                1.000      0.000    999.000    999.000
+    P37                1.000      0.000    999.000    999.000
+    P43                1.000      0.000    999.000    999.000
+    P47                1.000      0.000    999.000    999.000
+    P50                1.000      0.000    999.000    999.000
+    P68                1.000      0.000    999.000    999.000
+    P73                1.000      0.000    999.000    999.000
+    P87                1.000      0.000    999.000    999.000
+    P90                1.000      0.000    999.000    999.000
+    P96                1.000      0.000    999.000    999.000
+
+ P10        ON
+    TIME              -0.724      0.039    -18.693      0.000
+
+ P33        ON
+    TIME              -0.157      0.039     -3.993      0.000
+
+ P37        ON
+    TIME              -0.850      0.040    -21.502      0.000
+
+ P43        ON
+    TIME               0.064      0.055      1.171      0.242
+
+ P47        ON
+    TIME              -0.344      0.040     -8.553      0.000
+
+ P50        ON
+    TIME               0.342      0.049      7.033      0.000
+
+ P68        ON
+    TIME              -0.008      0.039     -0.216      0.829
+
+ P73        ON
+    TIME               0.287      0.043      6.720      0.000
+
+ P87        ON
+    TIME               0.097      0.043      2.251      0.024
+
+ P90        ON
+    TIME               0.037      0.072      0.521      0.602
+
+ P96        ON
+    TIME              -0.604      0.039    -15.574      0.000
+
+ Means
+    THETA              0.000      0.000    999.000    999.000
+
+ Thresholds
+    P10$1             -1.602      0.032    -50.323      0.000
+    P10$2              0.063      0.029      2.199      0.028
+    P33$1             -0.071      0.029     -2.450      0.014
+    P33$2              1.253      0.031     40.659      0.000
+    P37$1             -0.510      0.029    -17.788      0.000
+    P37$2              0.745      0.029     25.768      0.000
+    P43$1              2.150      0.039     54.566      0.000
+    P43$2              4.046      0.059     68.186      0.000
+    P47$1              0.199      0.029      6.841      0.000
+    P47$2              1.782      0.033     53.818      0.000
+    P50$1              1.761      0.036     48.826      0.000
+    P50$2              3.052      0.044     69.837      0.000
+    P68$1             -0.172      0.028     -6.040      0.000
+    P68$2              1.815      0.032     56.733      0.000
+    P73$1              0.933      0.031     30.200      0.000
+    P73$2              3.065      0.041     75.147      0.000
+    P87$1              0.930      0.031     30.001      0.000
+    P87$2              2.938      0.040     72.588      0.000
+    P90$1              3.063      0.052     59.304      0.000
+    P90$2              5.394      0.101     53.504      0.000
+    P96$1             -1.440      0.031    -46.284      0.000
+    P96$2              0.083      0.029      2.900      0.004
+
+ Variances
+    THETA              1.244      0.024     50.799      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.585E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+RESULTS IN PROBABILITY SCALE
+
+                    Estimate
+
+ P10
+    Category 1         0.273
+    Category 2         0.310
+    Category 3         0.417
+ P33
+    Category 1         0.501
+    Category 2         0.244
+    Category 3         0.255
+ P37
+    Category 1         0.484
+    Category 2         0.231
+    Category 3         0.285
+ P43
+    Category 1         0.850
+    Category 2         0.119
+    Category 3         0.031
+ P47
+    Category 1         0.573
+    Category 2         0.257
+    Category 3         0.169
+ P50
+    Category 1         0.783
+    Category 2         0.134
+    Category 3         0.083
+ P68
+    Category 1         0.467
+    Category 2         0.348
+    Category 3         0.185
+ P73
+    Category 1         0.653
+    Category 2         0.267
+    Category 3         0.080
+ P87
+    Category 1         0.670
+    Category 2         0.248
+    Category 3         0.082
+ P90
+    Category 1         0.928
+    Category 2         0.064
+    Category 3         0.008
+ P96
+    Category 1         0.288
+    Category 2         0.287
+    Category 3         0.425
+
+
+LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+                                                95% C.I.
+                    Estimate       S.E.  Lower 2.5% Upper 2.5%
+
+ P10        ON
+    TIME               0.485      0.019      0.449      0.523
+
+ P33        ON
+    TIME               0.855      0.034      0.792      0.923
+
+ P37        ON
+    TIME               0.427      0.017      0.396      0.462
+
+ P43        ON
+    TIME               1.066      0.058      0.958      1.187
+
+ P47        ON
+    TIME               0.709      0.029      0.655      0.767
+
+ P50        ON
+    TIME               1.408      0.069      1.280      1.549
+
+ P68        ON
+    TIME               0.992      0.039      0.919      1.070
+
+ P73        ON
+    TIME               1.332      0.057      1.225      1.448
+
+ P87        ON
+    TIME               1.102      0.047      1.013      1.199
+
+ P90        ON
+    TIME               1.038      0.075      0.902      1.195
+
+ P96        ON
+    TIME               0.547      0.021      0.507      0.590
+
+
+BRANT WALD TEST FOR PROPORTIONAL ODDS
+
+                                   Degrees of
+                      Chi-Square     Freedom   P-Value
+
+  P10
+    Overall test          13.147         1      0.000
+    TIME                  13.147         1      0.000
+
+  P33
+    Overall test          18.537         1      0.000
+    TIME                  18.537         1      0.000
+
+  P37
+    Overall test           0.000         1      0.982
+    TIME                   0.000         1      0.982
+
+  P43
+    Overall test           5.480         1      0.019
+    TIME                   5.480         1      0.019
+
+  P47
+    Overall test          14.331         1      0.000
+    TIME                  14.331         1      0.000
+
+  P50
+    Overall test           0.328         1      0.567
+    TIME                   0.328         1      0.567
+
+  P68
+    Overall test           0.827         1      0.363
+    TIME                   0.827         1      0.363
+
+  P73
+    Overall test           4.046         1      0.044
+    TIME                   4.046         1      0.044
+
+  P87
+    Overall test           0.729         1      0.393
+    TIME                   0.729         1      0.393
+
+  P90
+    Overall test           0.074         1      0.786
+    TIME                   0.074         1      0.786
+
+  P96
+    Overall test           7.630         1      0.006
+    TIME                   7.630         1      0.006
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ THETA    BY
+    P10              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P33              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P37              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P43              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P47              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P50              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P68              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P73              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P87              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P90              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    P96              1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ P10      ON
+    TIME            -0.824      -0.800      -0.788      -0.724      -0.661      -0.648      -0.625
+
+ P33      ON
+    TIME            -0.258      -0.234      -0.221      -0.157      -0.092      -0.080      -0.056
+
+ P37      ON
+    TIME            -0.952      -0.928      -0.915      -0.850      -0.785      -0.773      -0.748
+
+ P43      ON
+    TIME            -0.077      -0.043      -0.026       0.064       0.154       0.171       0.205
+
+ P47      ON
+    TIME            -0.448      -0.423      -0.411      -0.344      -0.278      -0.265      -0.241
+
+ P50      ON
+    TIME             0.217       0.247       0.262       0.342       0.423       0.438       0.468
+
+ P68      ON
+    TIME            -0.109      -0.085      -0.073      -0.008       0.056       0.068       0.092
+
+ P73      ON
+    TIME             0.177       0.203       0.217       0.287       0.357       0.370       0.397
+
+ P87      ON
+    TIME            -0.014       0.013       0.026       0.097       0.168       0.181       0.208
+
+ P90      ON
+    TIME            -0.148      -0.103      -0.081       0.037       0.156       0.178       0.223
+
+ P96      ON
+    TIME            -0.703      -0.680      -0.667      -0.604      -0.540      -0.528      -0.504
+
+ Means
+    THETA            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Thresholds
+    P10$1           -1.684      -1.664      -1.654      -1.602      -1.549      -1.539      -1.520
+    P10$2           -0.011       0.007       0.016       0.063       0.111       0.120       0.138
+    P33$1           -0.146      -0.128      -0.119      -0.071      -0.023      -0.014       0.004
+    P33$2            1.174       1.192       1.202       1.253       1.304       1.313       1.332
+    P37$1           -0.583      -0.566      -0.557      -0.510      -0.463      -0.454      -0.436
+    P37$2            0.670       0.688       0.697       0.745       0.792       0.801       0.819
+    P43$1            2.048       2.072       2.085       2.150       2.214       2.227       2.251
+    P43$2            3.893       3.930       3.949       4.046       4.144       4.163       4.199
+    P47$1            0.124       0.142       0.151       0.199       0.247       0.256       0.274
+    P47$2            1.697       1.717       1.728       1.782       1.837       1.847       1.867
+    P50$1            1.668       1.691       1.702       1.761       1.821       1.832       1.854
+    P50$2            2.939       2.966       2.980       3.052       3.124       3.138       3.165
+    P68$1           -0.245      -0.228      -0.219      -0.172      -0.125      -0.116      -0.099
+    P68$2            1.733       1.753       1.763       1.815       1.868       1.878       1.898
+    P73$1            0.853       0.872       0.882       0.933       0.984       0.993       1.012
+    P73$2            2.960       2.985       2.998       3.065       3.132       3.145       3.170
+    P87$1            0.851       0.870       0.879       0.930       0.981       0.991       1.010
+    P87$2            2.833       2.858       2.871       2.938       3.004       3.017       3.042
+    P90$1            2.930       2.961       2.978       3.063       3.147       3.164       3.196
+    P90$2            5.134       5.196       5.228       5.394       5.559       5.591       5.653
+    P96$1           -1.521      -1.501      -1.492      -1.440      -1.389      -1.379      -1.360
+    P96$2            0.009       0.027       0.036       0.083       0.131       0.140       0.157
+
+ Variances
+    THETA            1.181       1.196       1.204       1.244       1.284       1.292       1.307
+
+
+CONFIDENCE INTERVALS FOR THE LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+ P10      ON
+    TIME             0.439       0.449       0.455       0.485       0.517       0.523       0.535
+
+ P33      ON
+    TIME             0.773       0.792       0.802       0.855       0.912       0.923       0.946
+
+ P37      ON
+    TIME             0.386       0.396       0.400       0.427       0.456       0.462       0.473
+
+ P43      ON
+    TIME             0.926       0.958       0.974       1.066       1.166       1.187       1.227
+
+ P47      ON
+    TIME             0.639       0.655       0.663       0.709       0.757       0.767       0.786
+
+ P50      ON
+    TIME             1.242       1.280       1.300       1.408       1.526       1.549       1.597
+
+ P68      ON
+    TIME             0.897       0.919       0.930       0.992       1.057       1.070       1.096
+
+ P73      ON
+    TIME             1.193       1.225       1.242       1.332       1.429       1.448       1.487
+
+ P87      ON
+    TIME             0.986       1.013       1.026       1.102       1.183       1.199       1.231
+
+ P90      ON
+    TIME             0.863       0.902       0.922       1.038       1.168       1.195       1.249
+
+ P96      ON
+    TIME             0.495       0.507       0.513       0.547       0.583       0.590       0.604
+
+
+RESIDUAL OUTPUT
+
+
+     RESIDUAL OUTPUT IS NOT AVAILABLE FOR THIS MODEL.  ADDITIONAL OUTPUT FOR
+     CATEGORICAL, COUNT, AND NOMINAL VARIABLES MAY BE AVAILABLE USING TECH10.
+
+
+SAMPLE STATISTICS FOR ESTIMATED FACTOR SCORES
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              THETA         THETA_SE
+              ________      ________
+                0.000         0.587
+
+
+           Covariances
+              THETA         THETA_SE
+              ________      ________
+ THETA          0.896
+ THETA_SE      -0.040         0.003
+
+
+           Correlations
+              THETA         THETA_SE
+              ________      ________
+ THETA          1.000
+ THETA_SE      -0.747         1.000
+
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    grm_03_heterogenous_eta.dat
+
+  Order and format of variables
+
+    P10            F10.3
+    P33            F10.3
+    P37            F10.3
+    P43            F10.3
+    P47            F10.3
+    P50            F10.3
+    P68            F10.3
+    P73            F10.3
+    P87            F10.3
+    P90            F10.3
+    P96            F10.3
+    TIME           F10.3
+    THETA          F10.3
+    THETA_SE       F10.3
+    ID_I           I7
+
+  Save file format
+    14F10.3 I7
+
+  Save file record length    10000
+
+  Save missing symbol        *
+
+
+     Beginning Time:  02:07:03
+        Ending Time:  02:07:07
+       Elapsed Time:  00:00:04
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2023 Muthen & Muthen

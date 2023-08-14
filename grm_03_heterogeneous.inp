@@ -1,0 +1,66 @@
+DATA:
+FILE = "elpi_2010_2012_anx.dat";
+ 
+VARIABLE:
+NAMES = p10 p33 p37 p43 p47 p50 p68 p73 p87 p90 p96 id_i time; 
+
+MISSING=.;
+ 
+USEVARIABLES =
+p10-p96
+time
+;
+
+CATEGORICAL = 
+p10-p96;
+
+IDVARIABLE = id_i;
+
+ANALYSIS:
+TYPE = GENERAL;
+ESTIMATOR = MLR;
+
+MODEL:
+!measurement model
+theta by p10@1;
+theta by p33@1;
+theta by p37@1;
+theta by p43@1;
+theta by p47@1;
+theta by p50@1;
+theta by p68@1;
+theta by p73@1;
+theta by p87@1;
+theta by p90@1;
+theta by p96@1;
+
+!heterogenous gap
+p10 on time (d10);
+p33 on time (d33);
+p37 on time (d37);
+p43 on time (d43);
+p47 on time (d47);
+p50 on time (d50);
+p68 on time (d68);
+p73 on time (d73);
+p87 on time (d87);
+p90 on time (d90);
+p96 on time (d96);
+
+!latent mean centered
+[theta@0];
+
+!variance;
+theta(psi);
+
+
+OUTPUT:
+CINTERVAL
+RESIDUAL
+;
+
+SAVEDATA:
+
+FILE = grm_03_heterogenous_eta.dat;  
+SAVE = FSCORES;
+

@@ -1,0 +1,63 @@
+DATA:
+FILE = "elpi_2010_2012_anx.dat";
+ 
+VARIABLE:
+NAMES = p10 p33 p37 p43 p47 p50 p68 p73 p87 p90 p96 id_i time; 
+
+MISSING=.;
+ 
+USEVARIABLES =
+p10-p96
+time
+;
+
+CATEGORICAL = 
+p10-p96;
+
+IDVARIABLE = id_i;
+
+ANALYSIS:
+TYPE = GENERAL;
+ESTIMATOR = MLR;
+
+MODEL:
+!measurement model
+theta by p10@1;
+theta by p33@1;
+theta by p37@1;
+theta by p43@1;
+theta by p47@1;
+theta by p50@1;
+theta by p68@1;
+theta by p73@1;
+theta by p87@1;
+theta by p90@1;
+theta by p96@1;
+
+!common gap
+p10 on time (gap);
+p33 on time (gap);
+p37 on time (gap);
+p43 on time (gap);
+p47 on time (gap);
+p50 on time (gap);
+p68 on time (gap);
+p73 on time (gap);
+p87 on time (gap);
+p90 on time (gap);
+p96 on time (gap);
+
+!variance;
+theta(psi);
+
+
+OUTPUT:
+CINTERVAL
+RESIDUAL
+;
+
+SAVEDATA:
+
+FILE = grm_02_common_eta.dat;  
+SAVE = FSCORES;
+
